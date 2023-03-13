@@ -21,7 +21,7 @@ if(isset($_SESSION['loginUser']) && (isset($_SESSION['passUser']))){
         <div class="col-lg-4"></div>
             <div class="col-lg-4">
             <form action="" method="post" enctype="multipart/form-data">
-                    <h2>Formulário</h2>
+                    <h2>Login</h2>
                     
                     <div class="form-group">
                         <label>Email:</label>
@@ -38,9 +38,26 @@ if(isset($_SESSION['loginUser']) && (isset($_SESSION['passUser']))){
                 <?php
                 //Sessão foi criada, falta criar o encerramento da sessão, assistir a parte 3 no Criar Login LTI Treinamento
                                         include_once('config/conexao.php');
+                                        
+                                        if(isset($_GET['acao'])){
+                                            $acao = $_GET['acao'];
+                                            if($acao=='negado'){
+                                                echo '<div class="container">
+                                                        <div class="alert alert-danger" role="alert">
+                                                            Erro ao acessar o sistema !
+                                                        </div>
+                                                    </div>';
+                                            }else if($acao=='sair'){
+                                                echo '<div class="container">
+                                                <div class="alert alert-primary" role="alert">
+                                                    Seção encerrada com sucesso c:
+                                                </div>
+                                            </div>';
+                                            }
+                                        }
                                         if(isset($_POST['btn'])){
-                                            $login=filter_input(INPUT_GET,'email', FILTER_DEFAULT);
-                                            $pass=filter_input(INPUT_GET,'pass', FILTER_DEFAULT);
+                                            $login=filter_input(INPUT_POST,'email', FILTER_DEFAULT);
+                                            $pass=filter_input(INPUT_POST,'pass', FILTER_DEFAULT);
 
                                             $select="SELECT * FROM tbusers WHERE emailUser=:emailLog AND passUser=:passLog";
 
@@ -59,11 +76,19 @@ if(isset($_SESSION['loginUser']) && (isset($_SESSION['passUser']))){
                                                 $_SESSION['loginUser'] = $login;
                                                 $_SESSION['passUser'] = $pass;
                                 
-                                                echo 'Seja bem-vindo(a) :)';
+                                                echo '<div class="container">
+                                                        <div class="alert alert-success" role="alert">
+                                                            Bem-vindo <3!
+                                                        </div>
+                                                    </div>';
                                             
-                                                header("Refresh: 3, home.php?acao=welcome");
+                                                header("Refresh: .3, home.php?acao=welcome");
                                             }else{
-                                                echo "Usuário inválido";
+                                                echo '<div class="container">
+                                                        <div class="alert alert-danger" role="alert">
+                                                            Usuário inválido :(
+                                                        </div>
+                                                    </div>';
                                             }
                                             } catch(PDOException $e){
                                             echo "<strong>ERRO DE LOGIN = </strong>".$e->getMessage();

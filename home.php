@@ -1,10 +1,11 @@
 <?php
 ob_start(); //ARMAZENA MEUS DADOS EM CACHE
 session_start(); //INICIA A SESSÃO
-if(isset($_SESSION['loginUser']) && (isset($_SESSION['senhaUser']))){
-    header("Location: home.php?acao=negadoTROUXA");
+if(!isset($_SESSION['loginUser']) && (!isset($_SESSION['passUser']))){
+    header("Location: index.php?acao=negado");
     exit;
 }
+include_once('sair.php')
 ?>
 <!DOCTYPE html>
 <html lang="pt_br">
@@ -18,6 +19,7 @@ if(isset($_SESSION['loginUser']) && (isset($_SESSION['senhaUser']))){
 <body>
     <div class="container">
         <div class="row">
+            <a href="?sair">Sair do sistema</a>
             <div class="col-lg-4">
             <form action="" method="post" enctype="multipart/form-data">
                     <h2>Formulário</h2>
