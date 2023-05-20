@@ -1,7 +1,7 @@
 <?php
 ob_start(); //ARMAZENA MEUS DADOS EM CACHE
 session_start(); //INICIA A SESSÃO
-if(isset($_SESSION['loginUser']) && (isset($_SESSION['senhaUser']))){
+if(!isset($_SESSION['loginUser']) && (isset($_SESSION['senhaUser']))){
     header("Location: home.php");
     exit;
 }
