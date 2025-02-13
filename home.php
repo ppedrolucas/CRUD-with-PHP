@@ -133,8 +133,8 @@ include_once('sair.php')
                             <td><?php echo $show-> nameUser;?></td>
                             <td><?php echo $show-> emailUser;?></td>
                             <td><?php echo $show-> passUser;?></td>
-                            <td><?php echo $show-> fotoUser; ?></td>
-                            <td>
+                            <td><img class="" src="img/salvos/<?php echo $show-> fotoUser; ?>" alt="" style="height: 100%; width: 50px; border-radius: 50%"></td>
+                            <td class="d-flex">
                                 <a href="update.php?id=<?php echo $show->idUser;?>" class="btn btn-success">Up</a>
                                 <a href="del.php?idDel=<?php echo $show->idUser;?>" class="btn btn-danger" title="Remover">Dn</a>
                             </td>
